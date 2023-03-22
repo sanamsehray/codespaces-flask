@@ -1,6 +1,6 @@
 from flask import Flask
 from skpy import Skype
-from flask import request
+from flask import request, jsonify
 app = Flask(__name__)
 @app.route('/',methods=['GET'] )
 def heloo():
@@ -13,15 +13,26 @@ def Skype_msgSend():
     password =  data.get('Password')
     sendTo = data.get('sendTo')
     msg = data.get('message')
-    sk = Skype(userName,password) # connect to Skype
-    sk.user # you
-    sk.contacts # your contacts
-    sk.chats # your conversations
-    ch = sk.contacts[sendTo].chat # 1-to-1 conversation
-    ch.sendMsg(msg)
-    # except:
-    #     print(userName, msg,sendTo, password)
-    #     return(msg)
-    # else:
-    #     return("Msg sent")
+
+    try:
+        sk = Skype(userName,password) # connect to Skype
+        sk.user # you
+        sk.contacts # your contacts
+        sk.chats # your conversations
+        ch = sk.contacts[sendTo].chat # 1-to-1 conversation
+        ch.sendMsg(msg)
+    except:
+        print(userName, msg,sendTo, password)
+        return jsonify(
+            result = "message Not sent",
+            status = 200,
+            message = "quried Sucessfully"
+            )
+    else:
+        return jsonify(
+            result = "message sent",
+            status = 200,
+            message = "quried Sucessfully"
+            )
+            
     
