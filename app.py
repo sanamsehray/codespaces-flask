@@ -23,7 +23,7 @@ def Skype_msgSend():
         ch.sendMsg(msg)
     except:
         print(userName, msg,sendTo, password)
-        return(data)
+        return(msg)
     else:
         return("Msg sent")
     

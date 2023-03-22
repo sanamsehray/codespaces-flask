@@ -1,2 +1,3 @@
 Flask==2.2.2
 skpy==0.10.4
+gunicorn==19.7.1
