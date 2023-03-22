@@ -1,7 +1,26 @@
-from flask import Flask, render_template
-
+from flask import Flask
+from skpy import Skype
+from flask import request
 app = Flask(__name__)
 
-@app.route("/")
-def hello_world():
-    return render_template("index.html", title="Hello")
+@app.route('/skypemsg',methods=['GET','POST'] )
+def Skype_msgSend():
+    data = request.json
+    userName = data.get('userName')
+    password =  data.get('Password')
+    sendTo = data.get('sendTo')
+    msg = data.get('message')
+
+    try:
+        sk = Skype(userName,password) # connect to Skype
+        sk.user # you
+        sk.contacts # your contacts
+        sk.chats # your conversations
+        ch = sk.contacts[sendTo].chat # 1-to-1 conversation
+        ch.sendMsg(msg)
+    except:
+        print(userName, msg,sendTo, password)
+        return(data)
+    else:
+        return("Msg sent")
+    
