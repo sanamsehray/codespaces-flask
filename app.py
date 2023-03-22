@@ -13,17 +13,15 @@ def Skype_msgSend():
     password =  data.get('Password')
     sendTo = data.get('sendTo')
     msg = data.get('message')
-
-    try:
-        sk = Skype(userName,password) # connect to Skype
-        sk.user # you
-        sk.contacts # your contacts
-        sk.chats # your conversations
-        ch = sk.contacts[sendTo].chat # 1-to-1 conversation
-        ch.sendMsg(msg)
-    except:
-        print(userName, msg,sendTo, password)
-        return(msg)
-    else:
-        return("Msg sent")
+    sk = Skype(userName,password) # connect to Skype
+    sk.user # you
+    sk.contacts # your contacts
+    sk.chats # your conversations
+    ch = sk.contacts[sendTo].chat # 1-to-1 conversation
+    ch.sendMsg(msg)
+    # except:
+    #     print(userName, msg,sendTo, password)
+    #     return(msg)
+    # else:
+    #     return("Msg sent")
     
