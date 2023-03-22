@@ -2,6 +2,9 @@ from flask import Flask
 from skpy import Skype
 from flask import request
 app = Flask(__name__)
+@app.route('/',methods=['GET'] )
+def heloo():
+    return "hello"
 
 @app.route('/skypemsg',methods=['GET','POST'] )
 def Skype_msgSend():
